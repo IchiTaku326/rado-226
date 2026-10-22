@@ -16,15 +16,27 @@
 定義: `R_k(E)` は、{1,…,n} のどの k 色塗りにも、E の単色の解 (x, y, z)(正の整数、n 以下、同じ値でもよい)が
 存在するような最小の n です。
 
-論文の LaTeX ソースは `paper/main.tex` です(ビルド: `./3_build_paper.bat`、または Overleaf にアップロード)。
+論文の LaTeX ソースは `paper/main.tex`、PDF は `paper/main.pdf` です。
 
-## 再現手順(Windows の PowerShell、Python 3)
+## 再現手順(どの OS でも。Python 3)
 
 ```
-./0_check_lower_bound.bat      # 数秒: 1〜225 の塗り方を検証
-./1_search_n226.bat            # 11コアで数時間: キューブ探索(再開可。事前に pip install python-sat)
-./2_check_proofs.bat           # 11コアで約1時間: キューブごとに DRAT 証明を検証(WSL と bin_linux/ が必要)
+python3 tools/rado_verify.py results/lower_bound_n225/cert_a2_b3_k4_n225_seed5.json
+    # 数秒: 1〜225 の4色の塗り方を検証(期待: VALID)
+
+pip install python-sat
+python3 tools/cube_search.py --a 2 --b 3 --k 4 --n 226 --depth 10 --workers 11 \
+    --backend pysat --budget 20000 --outdir results/cube_search_n226
+    # 11コアで数時間、再開可(もう一度実行すれば続きから)。最後に FINAL.txt(期待: all_unsat=YES)
+
+python3 tools/verify_proofs.py --workers 11 --outdir results/proof_check_n226
+    # 11コアで約1時間、Linux/WSL。bin_linux/cadical と bin_linux/drat-trim が必要(bin_linux/README.md 参照)
+    # 期待: VERIFIED 14162/14162
 ```
+
+`--workers` は自分のコア数にしてください。同じ手順を `0_check_lower_bound.sh`、`1_search_n226.sh`、`2_check_proofs.sh`
+(Linux/macOS/WSL では `bash 0_check_lower_bound.sh`)と、同名の `.bat`(Windows)にもまとめてあります。
+論文は `bash 3_build_paper.sh`(または `3_build_paper.bat`、Overleaf に `paper/main.tex` をアップロード)でビルドできます。
 
 私の実行結果はすべて `results/` に入っています(キューブごとの結果と JST 時刻、`FINAL.txt`)。
 DRAT 証明ファイルそのものは大きいので含めていません(手順2で再生成されます)。

@@ -17,15 +17,27 @@ Archived copy (Zenodo, all versions): https://doi.org/10.5281/zenodo.23565747
 Definitions: `R_k(E)` is the smallest `n` such that every k-colouring of {1,…,n} contains a monochromatic solution
 `(x, y, z)` of `E` in positive integers ≤ n (the variables need not be distinct).
 
-The write-up (LaTeX source) is in `paper/main.tex` (build: `./3_build_paper.bat`, or upload to Overleaf).
+The write-up (LaTeX source) is in `paper/main.tex` (PDF: `paper/main.pdf`).
 
-## Reproduce (Windows, PowerShell; Python 3)
+## Reproduce (any OS; Python 3)
 
 ```
-./0_check_lower_bound.bat      # seconds: validates the colouring of 1..225
-./1_search_n226.bat            # hours on ~11 cores: cube search, resumable (needs: pip install python-sat)
-./2_check_proofs.bat           # ~1 h on 11 cores: DRAT proof per cube, needs WSL + bin_linux/ (see bin_linux/README.md)
+python3 tools/rado_verify.py results/lower_bound_n225/cert_a2_b3_k4_n225_seed5.json
+    # seconds: validates the 4-colouring of 1..225  (expected: VALID)
+
+pip install python-sat
+python3 tools/cube_search.py --a 2 --b 3 --k 4 --n 226 --depth 10 --workers 11 \
+    --backend pysat --budget 20000 --outdir results/cube_search_n226
+    # hours on ~11 cores, resumable: run again to continue; ends with FINAL.txt (expected: all_unsat=YES)
+
+python3 tools/verify_proofs.py --workers 11 --outdir results/proof_check_n226
+    # about 1 h on 11 cores, Linux/WSL; needs bin_linux/cadical and bin_linux/drat-trim (see bin_linux/README.md)
+    # expected: VERIFIED 14162/14162
 ```
+
+Set `--workers` to your number of cores. The same steps are wrapped in `0_check_lower_bound.sh`, `1_search_n226.sh`,
+`2_check_proofs.sh` (Linux/macOS/WSL: `bash 0_check_lower_bound.sh`) and in the `.bat` files of the same names (Windows).
+The paper builds with `bash 3_build_paper.sh` (or `3_build_paper.bat`, or upload `paper/main.tex` to Overleaf).
 
 All results of my own run are included: `results/cube_search_n226/` (per-cube status with JST times, `FINAL.txt`),
 `results/proof_check_n226/` (per-cube `VERIFIED` rows, `FINAL.txt`). The DRAT proof files themselves are not included
