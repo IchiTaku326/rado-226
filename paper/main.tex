@@ -127,7 +127,7 @@ System & Windows; proof checking in WSL (Linux) \\
 Workers & 11 processes for the cube search and for the proof check \\
 Lower bound & CaDiCaL 1.5.3 through PySAT \\
 Cube search & Glucose 4 through PySAT, assumptions, budget $2\cdot10^4$ conflicts \\
-Proof check & CaDiCaL (built from source) and \texttt{drat-trim}; exact commits not recorded \\
+Proof check & CaDiCaL 3.0.1 (static build) and \texttt{drat-trim} (version not recorded) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -159,7 +159,7 @@ We list the places where an error could still hide.
 \item \textbf{Cube list.} Completeness rests on Lemma~\ref{lem:cover} and the count $14{,}162$.
 \item \textbf{Proof checker.} \texttt{drat-trim} is widely used but is itself unverified software; a check with a formally verified
  checker such as \texttt{cake\_lpr} \cite{THM21} has not been done.
-\item \textbf{Hardware and software.} Runs were done on a single desktop PC (11 worker processes); versions of CaDiCaL and \texttt{drat-trim} were not recorded precisely.
+\item \textbf{Hardware and software.} Runs were done on a single desktop PC (11 worker processes); the version of \texttt{drat-trim} was not recorded.
 \end{enumerate}
 
 \section{Literature status}\label{sec:lit}
