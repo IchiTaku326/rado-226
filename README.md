@@ -12,6 +12,8 @@ Before this, the published table (Table 10 of *Rado Numbers and SAT Computations
 lists only the lower bound `> 225` for this equation. As far as I could find (see *Literature status* below),
 the exact value has not been published. **This is a small, specific computational result. It says nothing about P vs NP.**
 
+Archived copy (Zenodo, release v1.0): https://doi.org/10.5281/zenodo.23565748
+
 Definitions: `R_k(E)` is the smallest `n` such that every k-colouring of {1,…,n} contains a monochromatic solution
 `(x, y, z)` of `E` in positive integers ≤ n (the variables need not be distinct).
 

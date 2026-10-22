@@ -6,5 +6,6 @@ authors:
     given-names: "Takumi"
 repository-code: "https://github.com/IchiTaku326/rado-226"
 license: MIT
+doi: 10.5281/zenodo.23565748
 date-released: "2026-10-22"
 abstract: "Computation showing that the 4-colour Rado number of 2(x-y)=3z is 226 (colouring of 1..225 plus 14,162 DRAT-checked cubes for n=226). Not peer reviewed."
