@@ -1,0 +1,2 @@
+[2026-10-22 01:15:48 JST] cubes in list=14162; independent brute-force count of canonical solution-free prefixes=14162; MATCH
+[2026-10-22 02:23:35 JST] n=226 depth=10: VERIFIED 14162/14162 cubes (cadical DRAT proofs checked by drat-trim); all=YES
