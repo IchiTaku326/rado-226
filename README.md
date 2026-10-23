@@ -14,6 +14,8 @@ the exact value has not been published. **This is a small, specific computationa
 
 Archived copy (Zenodo, all versions): https://doi.org/10.5281/zenodo.23565747
 
+Paper (preprint, not peer reviewed; Zenodo, all versions): https://doi.org/10.5281/zenodo.23582300
+
 Definitions: `R_k(E)` is the smallest `n` such that every k-colouring of {1,…,n} contains a monochromatic solution
 `(x, y, z)` of `E` in positive integers ≤ n (the variables need not be distinct).
 
@@ -76,3 +78,7 @@ bin_linux/    where cadical and drat-trim go (not included)
 Note on code versions: `tools/` holds the current versions of the scripts. The recorded run used an earlier `cube_search.py`; the later changes only add an optional `--split` mode (off by default), so the default behaviour is unchanged.
 
 Licence: MIT (see `LICENSE`). Japanese version: `README.ja.md`.
+
+## Computing environment
+
+Intel Core i5-11400F, 32 GB DDR4, Windows 11 Home 64-bit (solvers run in WSL / Linux). CaDiCaL 3.0.1, drat-trim.
